@@ -117,3 +117,13 @@ footer {
   text-align: end;
   margin-right: 5%;
 }
+
+.date {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+}

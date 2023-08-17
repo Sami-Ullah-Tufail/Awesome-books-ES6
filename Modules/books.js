@@ -1,28 +1,20 @@
+/* eslint-disable no-use-before-define */
 const booklist = document.getElementById('bookShelf');
 const author = document.getElementById('author');
 const book = document.getElementById('title');
 const addButton = document.getElementById('addButton');
 const books = JSON.parse(localStorage.getItem('books')) || [];
-/* eslint no-use-before-define: "error" */
-/* eslint-disable */
+
 function storage() {
   localStorage.setItem('books', JSON.stringify(books));
 }
-function addbooks() {
-  const bookname = book.value.trim();
-  const titler = author.value.trim();
-  // console.log(bookname);
-  // console.log(titler);
-  if (bookname !== '' && titler !== '') {
-    const newbook = { bookname, titler };
-    books.push(newbook);
-    storage();
-    renderbooks();
-    // console.log(books,newbook);
-    book.value = '';
-    author.value = '';
-  }
+
+function removeBook(index) {
+  books.splice(index, 1);
+  storage();
+  renderbooks();
 }
+
 function renderbooks() {
   booklist.innerHTML = '';
   books.forEach((newbook, index) => {
@@ -37,15 +29,22 @@ function renderbooks() {
       removeBook(index);
     });
 
-    book_storage.appendChild(removeButton);
-    booklist.appendChild(book_storage);
+    bookStorage.appendChild(removeButton);
+    booklist.appendChild(bookStorage);
   });
 }
 
-function removeBook(index) {
-  books.splice(index, 1);
-  storage();
-  renderbooks();
+function addbooks() {
+  const bookname = book.value.trim();
+  const titler = author.value.trim();
+  if (bookname !== '' && titler !== '') {
+    const newbook = { bookname, titler };
+    books.push(newbook);
+    storage();
+    renderbooks();
+    book.value = '';
+    author.value = '';
+  }
 }
 
 export { renderbooks, addbooks, addButton };
